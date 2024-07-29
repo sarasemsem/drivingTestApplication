@@ -3,14 +3,29 @@ const { default: mongoose } = require("mongoose")
 //const mongoose = require('mongoose');
 
 const clientSchema = new mongoose.Schema({
-    name: {
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
         type: String,
         required: true,
     },
     email: String,
-    phone: String,
+    phone: {
+        type: String,
+        required: false,
+    },
     address: {
         type: String,
+        required: false,
+    },
+    testAppoinment: {
+        type: Date,
+        required: false,
+    },
+    MockTestScore: {
+        type: Number,
         required: false,
     },
 },
