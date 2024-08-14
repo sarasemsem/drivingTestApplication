@@ -3,22 +3,35 @@ const mongoose = require('mongoose');
 const clientRoute = require('./routes/client.route');
 const userRoute = require('./routes/user.route');
 const authRoute = require('./routes/auth.route');
+const cors = require('cors');
 const app = express()
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 dotenv.config();
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(cors({
+    origin: ["http://localhost:4200"],
+    credentials: true
+}));
+app.use(cookieParser());
+
+// routes
+app.use("/api/clients", clientRoute);
+app.use("/api/user", userRoute);
+app.use("/api/auth", authRoute);
 
 // Response Handler middleware
-app.use((obj, req, res, next) => {
-    const statusCode = obj.status || 500;
-    const message = obj.message || "Something went wrong";
+app.use((err, req, res, next) => {
+    const statusCode = err.status || 500;
+    const message = err.message || "Something went wrong";
     return res.status(statusCode).json({
-        success: [200,201,204].some(a => a === obj.status)? true : false,
+        success: false,
         status: statusCode,
         message: message,
-        data: obj.data
+        data: err.data || null
+        //stack: err.stack
     });
 });
 
@@ -29,8 +42,5 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log(err);
 });
 
-// routes
-app.use("/api/clients", clientRoute);
-app.use("/api/user", userRoute);
-app.use("/api/auth", authRoute);
+
 

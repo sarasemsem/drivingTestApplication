@@ -18,6 +18,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    isAdmin: {
+        type: String,
+        required: true,
+    },
+    token: {
+        type: String,
+        required: false,
+    },
 },
     {
         timestamps: true
