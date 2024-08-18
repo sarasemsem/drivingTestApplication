@@ -51,7 +51,7 @@ const getUser = async (req, res, next) => {
     }
   };
   
-  const deleteUser = async (req, res) => {
+  const deleteUser = async (req, res, next) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
         if (!user) {
