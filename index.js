@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const clientRoute = require('./routes/client.route');
 const userRoute = require('./routes/user.route');
 const authRoute = require('./routes/auth.route');
+const clientTestDataRoute = require('./routes/clientTestData.route');
 const cors = require('cors');
 const app = express()
 const dotenv = require('dotenv');
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use("/api/clients", clientRoute);
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/clientTestData", clientTestDataRoute);
 
 // Response Handler middleware
 app.use((err, req, res, next) => {

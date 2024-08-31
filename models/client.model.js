@@ -1,7 +1,6 @@
 const { default: mongoose } = require("mongoose")
 
 //const mongoose = require('mongoose');
-
 const clientSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -31,6 +30,8 @@ const clientSchema = new mongoose.Schema({
         type: Number,
         required: false,
     },
+    // Reference to TestData collection
+    tests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TestData' }],
 },
     {
         timestamps: true
