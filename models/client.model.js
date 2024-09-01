@@ -22,14 +22,6 @@ const clientSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    testAppoinment: {
-        type: Date,
-        required: false,
-    },
-    MockTestScore: {
-        type: Number,
-        required: false,
-    },
     // Reference to TestData collection
     tests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TestData' }],
 },
